@@ -7,17 +7,28 @@
     <style>
         /* Variáveis e Reset */
         :root {
-            --primary-color: #ff6b6b;
-            --primary-dark: #ff5252;
-            --secondary-color: #4ecdc4;
-            --text-color: #2d3436;
-            --text-light: #636e72;
-            --background-color: #f9f9f9;
-            --border-color: #ddd;
-            --white: #ffffff;
-            --shadow: 0 2px 5px rgba(0,0,0,0.1);
-            --shadow-hover: 0 4px 10px rgba(0,0,0,0.15);
+            --primary-color: #FF6B35;
+            --primary-dark: #E85826;
+            --secondary-color: #4CB944;
+            --secondary-dark: #3A9935;
+            --accent-color: #2F4858;
+            --text-color: #333333;
+            --text-light: #6E7C7C;
+            --background-color: #F8F9FA;
+            --background-light: #FFFFFF;
+            --background-dark: #EDF2F7;
+            --border-color: #E2E8F0;
+            --border-light: #EDF2F7;
+            --white: #FFFFFF;
+            --shadow: 0 3px 10px rgba(47, 72, 88, 0.08);
+            --shadow-hover: 0 6px 15px rgba(47, 72, 88, 0.15);
+            --success-color: #4CB944;
+            --warning-color: #FFC107;
+            --error-color: #F44336;
             --transition: all 0.3s ease;
+            --card-radius: 15px;
+            --button-radius: 25px;
+            --input-radius: 10px;
         }
 
         * {
@@ -28,10 +39,13 @@
 
         /* Estilos Base */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--background-color);
+            background-image: linear-gradient(45deg, var(--background-color) 0%, var(--background-light) 100%);
+            min-height: 100vh;
+            padding-bottom: 50px;
         }
 
         /* Layout */
@@ -48,27 +62,59 @@
         .header {
             grid-column: 1 / -1;
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0;
             background-color: var(--white);
             box-shadow: var(--shadow);
-            border-radius: 10px;
+            border-radius: var(--card-radius);
             margin-bottom: 30px;
+            background-image: linear-gradient(135deg, var(--background-light) 0%, var(--background-dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header:before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: rgba(255, 107, 53, 0.1);
+        }
+
+        .header:after {
+            content: "";
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: rgba(76, 185, 68, 0.1);
         }
 
         .header h1 {
             color: var(--primary-color);
-            font-size: 2.5em;
+            font-size: 2.8em;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
         }
 
         /* Categorias */
         .categoria {
             background: var(--white);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
+            border-radius: var(--card-radius);
+            padding: 30px;
+            margin-bottom: 35px;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
         .categoria:hover {
@@ -78,44 +124,51 @@
 
         .categoria h2 {
             color: var(--primary-color);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 10px;
+            padding-bottom: 15px;
             font-size: 1.8em;
+            letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
         /* Itens */
         .item {
             background: var(--white);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 15px 0;
+            border-radius: var(--card-radius);
+            padding: 25px;
+            margin: 20px 0;
             border: 1px solid var(--border-color);
             transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .item:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow);
+            border-color: var(--primary-color);
         }
 
         .item-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 15px;
+            gap: 20px;
         }
 
         .item-title {
-            font-size: 1.2em;
+            font-size: 1.25em;
             font-weight: 600;
             color: var(--text-color);
+            margin-left: 8px;
         }
 
         .item-description {
             color: var(--text-light);
             font-size: 0.95em;
             margin-top: 8px;
+            margin-left: 30px;
         }
 
         .item-price {
@@ -126,77 +179,149 @@
         /* Controles de Quantidade */
         .quantidade {
             width: 100px;
-            padding: 8px;
+            padding: 10px;
             border: 2px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: var(--input-radius);
             font-size: 1em;
             text-align: center;
             transition: var(--transition);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .quantidade:focus {
             border-color: var(--primary-color);
             outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.25);
+        }
+
+        /* Estilo para o seletor de bebidas */
+        .bebida-opcao, .bebida-tamanho {
+            margin-top: 12px;
+            padding: 10px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--input-radius);
+            font-size: 0.95em;
+            width: 100%;
+            transition: var(--transition);
+            background-color: var(--white);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF6B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            padding-right: 30px;
+        }
+        
+        .bebida-opcao:focus, .bebida-tamanho:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.25);
         }
 
         /* Carrinho */
         #carrinho {
             background: var(--white);
-            padding: 25px;
-            border-radius: 15px;
+            padding: 30px;
+            border-radius: var(--card-radius);
             position: sticky;
             top: 20px;
             box-shadow: var(--shadow);
             height: fit-content;
+            transition: var(--transition);
+            border-top: 5px solid var(--primary-color);
+        }
+
+        #carrinho:hover {
+            box-shadow: var(--shadow-hover);
         }
 
         #carrinho h2 {
             color: var(--primary-color);
             margin-bottom: 20px;
             font-size: 1.5em;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
         }
 
         .carrinho-item {
-            padding: 10px 0;
+            padding: 15px 0;
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .carrinho-item p {
+            margin: 5px 0;
         }
 
         .carrinho-total {
-            margin-top: 20px;
+            margin-top: 25px;
             padding-top: 20px;
             border-top: 2px solid var(--border-color);
             font-size: 1.2em;
             font-weight: bold;
+            color: var(--primary-color);
         }
 
         /* Botões */
         .btn {
-            padding: 12px 25px;
+            padding: 14px 25px;
             border: none;
-            border-radius: 8px;
+            border-radius: var(--button-radius);
             cursor: pointer;
             font-weight: 600;
             font-size: 1em;
             transition: var(--transition);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             width: 100%;
             margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: all 0.4s;
+            z-index: -1;
+        }
+
+        .btn:hover:before {
+            width: 100%;
         }
 
         .btn-primary {
             background-color: var(--primary-color);
             color: var(--white);
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
         }
 
         .btn-primary:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 53, 0.4);
         }
 
         .btn-secondary {
             background-color: var(--secondary-color);
             color: var(--white);
+            box-shadow: 0 4px 10px rgba(76, 185, 68, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(76, 185, 68, 0.4);
         }
 
         /* Formulário de Finalização */
@@ -206,21 +331,24 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: var(--shadow-hover);
+            padding: 35px;
+            border-radius: var(--card-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             width: 90%;
             max-width: 500px;
             z-index: 1000;
+            border-top: 5px solid var(--primary-color);
         }
 
         #formulario-finalizacao h2 {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: var(--primary-color);
+            text-align: center;
+            font-size: 1.8em;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .form-group label {
@@ -233,46 +361,57 @@
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: 2px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: var(--input-radius);
             font-size: 1em;
             transition: var(--transition);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             border-color: var(--primary-color);
             outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.25);
         }
 
         .payment-options {
             display: flex;
             gap: 15px;
             margin: 20px 0;
+            flex-wrap: wrap;
         }
 
         .payment-option {
             padding: 15px;
             border: 2px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: var(--input-radius);
             cursor: pointer;
             transition: var(--transition);
+            flex: 1 0 30%;
+            text-align: center;
+            background-color: var(--background-light);
         }
 
         .payment-option:hover {
             border-color: var(--primary-color);
+            background-color: rgba(255, 107, 53, 0.1);
         }
 
         button[type="submit"],
         button[type="button"] {
-            padding: 10px 20px;
+            padding: 14px 25px;
             border: none;
-            border-radius: 8px;
+            border-radius: var(--button-radius);
             cursor: pointer;
             font-weight: 600;
             transition: var(--transition);
-            margin-top: 10px;
+            margin-top: 20px;
+            min-width: 130px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         button[type="submit"] {
@@ -281,16 +420,21 @@
         }
 
         button[type="button"] {
-            background-color: var(--secondary-color);
-            color: var(--white);
+            background-color: var(--background-dark);
+            color: var(--text-color);
+            margin-right: 10px;
         }
 
         button[type="submit"]:hover {
             background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 53, 0.4);
         }
 
         button[type="button"]:hover {
-            background-color: #3bb3a3;
+            background-color: var(--border-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
 
         /* Responsividade */
@@ -311,11 +455,19 @@
 
             .item-header {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
             }
 
             .quantidade {
                 width: 100%;
+            }
+            
+            .payment-option {
+                flex: 1 0 100%;
+            }
+            
+            .header:before, .header:after {
+                display: none;
             }
         }
 
@@ -325,40 +477,118 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
         .item {
-            animation: fadeIn 0.5s ease-out;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .categoria {
+            animation: fadeIn 0.6s ease-out;
         }
 
         /* Checkbox personalizado */
         input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
+            appearance: none;
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            background-color: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
             margin-right: 10px;
-            accent-color: var(--primary-color);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        input[type="checkbox"]:checked::after {
+            content: '✓';
+            color: white;
+            font-size: 16px;
+            position: absolute;
+        }
+
+        input[type="checkbox"]:focus {
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.25);
+            outline: none;
         }
 
         /* Radio personalizado */
         input[type="radio"] {
-            width: 18px;
-            height: 18px;
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             margin-right: 8px;
-            accent-color: var(--primary-color);
+            transition: all 0.3s;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        input[type="radio"]:checked {
+            border-color: var(--primary-color);
+        }
+
+        input[type="radio"]:checked::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            position: absolute;
+        }
+
+        input[type="radio"]:focus {
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.25);
+            outline: none;
         }
 
         /* Adicione isso à seção de estilos */
         .item-image {
             width: 100%;
-            height: 200px;
+            height: 220px;
             overflow: hidden;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            border-radius: calc(var(--card-radius) - 5px);
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .item-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.2) 100%);
         }
 
         .item-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
 
         .item:hover .item-image img {
@@ -367,35 +597,6 @@
 
         .item-info {
             flex: 1;
-        }
-
-        /* Ajuste do layout do item para acomodar a imagem */
-        .item {
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-        }
-
-        /* Responsividade para as imagens */
-        @media (max-width: 768px) {
-            .item-image {
-                height: 150px;
-            }
-
-            .item-header {
-                flex-direction: column;
-            }
-
-            .quantidade {
-                width: 100%;
-                margin-top: 10px;
-            }
         }
 
         /* Filtros */
@@ -410,23 +611,47 @@
         .filtro-btn {
             padding: 12px 25px;
             border: 2px solid var(--primary-color);
-            border-radius: 25px;
+            border-radius: var(--button-radius);
             background: transparent;
             color: var(--primary-color);
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
+            min-width: 120px;
+            text-align: center;
         }
 
         .filtro-btn:hover {
             background: var(--primary-color);
             color: var(--white);
             transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
         }
 
         .filtro-btn.ativo {
             background: var(--primary-color);
             color: var(--white);
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+        }
+
+        .search-input {
+            padding: 14px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--button-radius);
+            font-size: 1em;
+            transition: var(--transition);
+            flex-grow: 1;
+            min-width: 200px;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' stroke='%23FF6B35' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3e%3ccircle cx='11' cy='11' r='8'%3e%3c/circle%3e%3cline x1='21' y1='21' x2='16.65' y2='16.65'%3e%3c/line%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 45px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.25);
         }
 
         /* Animação para os itens */
@@ -439,18 +664,52 @@
         }
 
         .categoria.visivel {
-            animation: fadeIn 0.5s ease-out;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Categoria com cores personalizadas */
+        .categoria:nth-child(3n+1) {
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .categoria:nth-child(3n+2) {
+            border-top: 5px solid var(--secondary-color);
+        }
+
+        .categoria:nth-child(3n+3) {
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .categoria:nth-child(3n+1) h2 {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .categoria:nth-child(3n+2) h2 {
+            color: var(--secondary-color);
+            border-bottom-color: var(--secondary-color);
+        }
+
+        .categoria:nth-child(3n+3) h2 {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
         }
 
         @media (max-width: 768px) {
             .filtros {
                 justify-content: center;
             }
+            
+            .filtro-btn {
+                min-width: 100px;
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
         }
 
         .form-control {
             position: relative;
-            margin: 20px 0 40px;
+            margin: 25px 0 40px;
             width: 100%;
         }
 
@@ -464,7 +723,7 @@
             padding: 15px 0;
             font-size: 18px;
             color: var(--text-color);
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
         .form-control input:focus,
@@ -473,6 +732,7 @@
         .form-control textarea:valid {
             outline: 0;
             border-bottom-color: var(--primary-color);
+            padding-bottom: 6px;
         }
 
         .form-control label {
@@ -496,6 +756,42 @@
         .form-control textarea:valid + label span {
             color: var(--primary-color);
             transform: translateY(-30px);
+        }
+        
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(47, 72, 88, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+        }
+
+        /* Categoria Icons */
+        .categoria h2:before {
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .categoria:nth-child(3n+1) h2:before {
+            content: "🍔";
+        }
+
+        .categoria:nth-child(3n+2) h2:before {
+            content: "🥐";
+        }
+
+        .categoria:nth-child(3n+3) h2:before {
+            content: "🥤";
         }
     </style>
 </head>
@@ -521,7 +817,7 @@
                 
                 <div class="item">
                     <div class="item-image">
-                        <img src="https://placehold.co/300x200/ff6b6b/fff?text=X-Burger" alt="X-Burger Tradicional">
+                        <img src="https://placehold.co/300x200/FF6B35/fff?text=X-Burger" alt="X-Burger Tradicional">
                     </div>
                     <div class="item-header">
                         <div class="item-info">
@@ -535,7 +831,7 @@
 
                 <div class="item">
                     <div class="item-image">
-                        <img src="https://placehold.co/300x200/ff6b6b/fff?text=X-Bacon" alt="X-Bacon Especial">
+                        <img src="https://placehold.co/300x200/E85826/fff?text=X-Bacon" alt="X-Bacon Especial">
                     </div>
                     <div class="item-header">
                         <div class="item-info">
@@ -549,7 +845,7 @@
 
                 <div class="item">
                     <div class="item-image">
-                        <img src="https://placehold.co/300x200/ff6b6b/fff?text=X-Salada" alt="X-Salada Duplo">
+                        <img src="https://placehold.co/300x200/FF6B35/fff?text=X-Salada" alt="X-Salada Duplo">
                     </div>
                     <div class="item-header">
                         <div class="item-info">
@@ -568,7 +864,7 @@
                 
                 <div class="item">
                     <div class="item-image">
-                        <img src="https://placehold.co/300x200/4ecdc4/fff?text=Coxinha" alt="Coxinha">
+                        <img src="https://placehold.co/300x200/4CB944/fff?text=Coxinha" alt="Coxinha">
                     </div>
                     <div class="item-header">
                         <div class="item-info">
@@ -582,7 +878,7 @@
 
                 <div class="item">
                     <div class="item-image">
-                        <img src="https://placehold.co/300x200/4ecdc4/fff?text=Pastel" alt="Pastel">
+                        <img src="https://placehold.co/300x200/3A9935/fff?text=Pastel" alt="Pastel">
                     </div>
                     <div class="item-header">
                         <div class="item-info">
@@ -601,13 +897,30 @@
                 
                 <div class="item">
                     <div class="item-image">
-                        <img src="https://placehold.co/300x200/2d3436/fff?text=Refrigerante" alt="Refrigerante">
+                        <img src="https://placehold.co/300x200/2F4858/fff?text=Refrigerante" alt="Refrigerante">
                     </div>
                     <div class="item-header">
                         <div class="item-info">
                             <input type="checkbox" id="bebida1">
                             <label for="bebida1" class="item-title">Refrigerante - R$ 8,00</label>
-                            <p class="item-description">Lata 350ml (Coca-Cola, Guaraná, Sprite)</p>
+                            <p class="item-description">Selecione o tipo e tamanho</p>
+                            
+                            <select class="bebida-opcao" id="refrigerante-opcao" data-preco-base="8.00">
+                                <option value="" disabled selected>Selecione o sabor</option>
+                                <option value="coca" data-preco="8.50">Coca-Cola (R$ 8,50)</option>
+                                <option value="guarana" data-preco="8.00">Guaraná (R$ 8,00)</option>
+                                <option value="sprite" data-preco="8.00">Sprite (R$ 8,00)</option>
+                                <option value="fanta-laranja" data-preco="7.50">Fanta Laranja (R$ 7,50)</option>
+                                <option value="fanta-uva" data-preco="7.50">Fanta Uva (R$ 7,50)</option>
+                            </select>
+                            
+                            <select class="bebida-tamanho" id="refrigerante-tamanho" style="margin-top: 10px;">
+                                <option value="" disabled selected>Selecione o tamanho</option>
+                                <option value="lata" data-fator-preco="1">Lata 350ml</option>
+                                <option value="600ml" data-fator-preco="1.6">Garrafa 600ml (+60%)</option>
+                                <option value="1L" data-fator-preco="2.2">Garrafa 1L (+120%)</option>
+                                <option value="2L" data-fator-preco="2.8">Garrafa 2L (+180%)</option>
+                            </select>
                         </div>
                         <input type="number" min="1" value="1" class="quantidade">
                     </div>
@@ -615,13 +928,30 @@
 
                 <div class="item">
                     <div class="item-image">
-                        <img src="https://placehold.co/300x200/2d3436/fff?text=Suco" alt="Suco Natural">
+                        <img src="https://placehold.co/300x200/4F6D7A/fff?text=Suco" alt="Suco Natural">
                     </div>
                     <div class="item-header">
                         <div class="item-info">
                             <input type="checkbox" id="bebida2">
                             <label for="bebida2" class="item-title">Suco Natural - R$ 12,00</label>
-                            <p class="item-description">500ml (Laranja, Limão, Maracujá)</p>
+                            <p class="item-description">Selecione o sabor e tamanho</p>
+                            
+                            <select class="bebida-opcao" id="suco-opcao" data-preco-base="12.00">
+                                <option value="" disabled selected>Selecione o sabor</option>
+                                <option value="laranja" data-preco="12.00">Laranja (R$ 12,00)</option>
+                                <option value="limao" data-preco="12.00">Limão (R$ 12,00)</option>
+                                <option value="maracuja" data-preco="13.50">Maracujá (R$ 13,50)</option>
+                                <option value="abacaxi" data-preco="13.00">Abacaxi (R$ 13,00)</option>
+                                <option value="morango" data-preco="14.50">Morango (R$ 14,50)</option>
+                            </select>
+                            
+                            <select class="bebida-tamanho" id="suco-tamanho" style="margin-top: 10px;">
+                                <option value="" disabled selected>Selecione o tamanho</option>
+                                <option value="300ml" data-fator-preco="0.8">Copo 300ml (-20%)</option>
+                                <option value="500ml" data-fator-preco="1">Copo 500ml</option>
+                                <option value="700ml" data-fator-preco="1.4">Copo 700ml (+40%)</option>
+                                <option value="1L" data-fator-preco="1.8">Jarra 1L (+80%)</option>
+                            </select>
                         </div>
                         <input type="number" min="1" value="1" class="quantidade">
                     </div>
@@ -639,6 +969,8 @@
             <button class="btn btn-primary" onclick="finalizarPedido()">Finalizar Pedido</button>
         </aside>
     </div>
+
+    <div id="overlay"></div>
 
     <!-- Formulário de Finalização -->
     <div id="formulario-finalizacao" style="display: none;">
@@ -679,14 +1011,52 @@
             // Adiciona cada item selecionado ao carrinho
             itensSelecionados.forEach(item => {
                 const quantidade = item.closest('.item').querySelector('.quantidade').value;
+                let precoUnitario = 0;
+                let nomeProduto = item.nextElementSibling.textContent.split(' - ')[0];
+                
+                // Verifica se é bebida com opção selecionada
+                const itemElement = item.closest('.item');
+                const refrigeranteSelect = itemElement.querySelector('#refrigerante-opcao');
+                const sucoSelect = itemElement.querySelector('#suco-opcao');
+                const refriTamanho = itemElement.querySelector('#refrigerante-tamanho');
+                const sucoTamanho = itemElement.querySelector('#suco-tamanho');
+                
+                // Define o preço baseado na opção e tamanho selecionados
+                if (refrigeranteSelect && refrigeranteSelect.value && refriTamanho && refriTamanho.value) {
+                    const opcaoSelecionada = refrigeranteSelect.options[refrigeranteSelect.selectedIndex];
+                    const tamanhoSelecionado = refriTamanho.options[refriTamanho.selectedIndex];
+                    
+                    const precoBase = parseFloat(opcaoSelecionada.dataset.preco);
+                    const fatorPreco = parseFloat(tamanhoSelecionado.dataset.fatorPreco);
+                    precoUnitario = precoBase * fatorPreco;
+                    
+                    const nomeSabor = opcaoSelecionada.text.split(' (')[0];
+                    const nomeTamanho = tamanhoSelecionado.text.split(' (')[0];
+                    nomeProduto += ` (${nomeSabor}, ${nomeTamanho})`;
+                } else if (sucoSelect && sucoSelect.value && sucoTamanho && sucoTamanho.value) {
+                    const opcaoSelecionada = sucoSelect.options[sucoSelect.selectedIndex];
+                    const tamanhoSelecionado = sucoTamanho.options[sucoTamanho.selectedIndex];
+                    
+                    const precoBase = parseFloat(opcaoSelecionada.dataset.preco);
+                    const fatorPreco = parseFloat(tamanhoSelecionado.dataset.fatorPreco);
+                    precoUnitario = precoBase * fatorPreco;
+                    
+                    const nomeSabor = opcaoSelecionada.text.split(' (')[0];
+                    const nomeTamanho = tamanhoSelecionado.text.split(' (')[0];
+                    nomeProduto += ` (${nomeSabor}, ${nomeTamanho})`;
+                } else {
+                    // Para itens sem seletor de opção, usa o preço do texto
                 const precoTexto = item.nextElementSibling.textContent.match(/R\$\s*(\d+,\d{2})/)[1];
-                const preco = parseFloat(precoTexto.replace(',', '.'));
-                const totalItem = preco * quantidade;
+                    precoUnitario = parseFloat(precoTexto.replace(',', '.'));
+                }
+
+                const totalItem = precoUnitario * quantidade;
 
                 const carrinhoItem = document.createElement('div');
                 carrinhoItem.className = 'carrinho-item';
                 carrinhoItem.innerHTML = `
-                    <p>${item.nextElementSibling.textContent.split(' - ')[0]}</p>
+                    <p>${nomeProduto}</p>
+                    <p>Preço: R$ ${precoUnitario.toFixed(2).replace('.', ',')}</p>
                     <p>Quantidade: ${quantidade}</p>
                     <p>Subtotal: R$ ${(totalItem).toFixed(2).replace('.', ',')}</p>
                 `;
@@ -700,8 +1070,83 @@
         }
 
         // Adiciona eventos de mudança aos checkboxes e campos de quantidade
-        document.querySelectorAll('.item input[type="checkbox"], .quantidade').forEach(element => {
+        document.querySelectorAll('.item input[type="checkbox"], .quantidade, .bebida-opcao, .bebida-tamanho').forEach(element => {
             element.addEventListener('change', atualizarCarrinho);
+        });
+
+        // Atualizar preço quando a opção de bebida for alterada
+        document.querySelectorAll('.bebida-opcao, .bebida-tamanho').forEach(select => {
+            select.addEventListener('change', function() {
+                const itemInfo = this.closest('.item-info');
+                const sabor = itemInfo.querySelector('.bebida-opcao');
+                const tamanho = itemInfo.querySelector('.bebida-tamanho');
+                
+                // Só atualiza se ambos sabor e tamanho foram selecionados
+                if (sabor.value && tamanho.value) {
+                    const opcaoSelecionada = sabor.options[sabor.selectedIndex];
+                    const tamanhoSelecionado = tamanho.options[tamanho.selectedIndex];
+                    
+                    const precoBase = parseFloat(opcaoSelecionada.dataset.preco);
+                    const fatorPreco = parseFloat(tamanhoSelecionado.dataset.fatorPreco);
+                    
+                    const precoFinal = precoBase * fatorPreco;
+                    const itemTitle = itemInfo.querySelector('.item-title');
+                    
+                    // Atualiza o título com o novo preço
+                    const tituloBase = itemTitle.textContent.split(' - ')[0];
+                    itemTitle.textContent = `${tituloBase} - R$ ${precoFinal.toFixed(2).replace('.', ',')}`;
+                    
+                    // Se o checkbox estiver marcado, atualiza o carrinho
+                    const checkbox = itemInfo.querySelector('input[type="checkbox"]');
+                    if (checkbox.checked) {
+                        atualizarCarrinho();
+                    }
+                }
+            });
+        });
+
+        // Verificação de seleção de refrigerante
+        document.getElementById('bebida1').addEventListener('change', function() {
+            const refrigeranteSelect = document.getElementById('refrigerante-opcao');
+            const tamanhoSelect = document.getElementById('refrigerante-tamanho');
+            
+            if (this.checked) {
+                if (refrigeranteSelect.value === '') {
+                    alert('Por favor, selecione qual refrigerante você deseja.');
+                    setTimeout(() => refrigeranteSelect.focus(), 100);
+                    return;
+                }
+                
+                if (tamanhoSelect.value === '') {
+                    alert('Por favor, selecione o tamanho do refrigerante.');
+                    setTimeout(() => tamanhoSelect.focus(), 100);
+                    return;
+                }
+            }
+            
+            atualizarCarrinho();
+        });
+
+        // Verificação de seleção de suco
+        document.getElementById('bebida2').addEventListener('change', function() {
+            const sucoSelect = document.getElementById('suco-opcao');
+            const tamanhoSelect = document.getElementById('suco-tamanho');
+            
+            if (this.checked) {
+                if (sucoSelect.value === '') {
+                    alert('Por favor, selecione qual sabor de suco você deseja.');
+                    setTimeout(() => sucoSelect.focus(), 100);
+                    return;
+                }
+                
+                if (tamanhoSelect.value === '') {
+                    alert('Por favor, selecione o tamanho do suco.');
+                    setTimeout(() => tamanhoSelect.focus(), 100);
+                    return;
+                }
+            }
+            
+            atualizarCarrinho();
         });
 
         // Função para finalizar o pedido
@@ -711,20 +1156,15 @@
                 alert('Por favor, selecione pelo menos um item antes de finalizar o pedido.');
                 return;
             }
+            document.getElementById('overlay').style.display = 'block';
             document.getElementById('formulario-finalizacao').style.display = 'block';
         }
 
         // Função para cancelar o pedido
         function cancelarPedido() {
+            document.getElementById('overlay').style.display = 'none';
             document.getElementById('formulario-finalizacao').style.display = 'none';
         }
-
-        // Aqui você adicionaria mais funções JavaScript para:
-        // - Atualizar o carrinho quando itens são selecionados
-        // - Calcular o total do pedido
-        // - Processar o formulário de finalização
-        // - Validar dados do cliente
-        // - Confirmar o pedido
 
         document.addEventListener('DOMContentLoaded', function() {
             const filtros = document.querySelectorAll('.filtro-btn');
@@ -738,7 +1178,9 @@
                         setTimeout(() => cat.classList.add('visivel'), 10);
                     } else {
                         const nomeCategoria = cat.querySelector('h2').textContent.toLowerCase();
-                        if (nomeCategoria.includes(categoria)) {
+                        if (categoria === 'hamburgueres' && nomeCategoria.includes('hambúrgueres') || 
+                            categoria === nomeCategoria || 
+                            nomeCategoria.includes(categoria)) {
                             cat.classList.remove('escondido');
                             setTimeout(() => cat.classList.add('visivel'), 10);
                         } else {
@@ -773,17 +1215,22 @@
             const style = document.createElement('style');
             style.textContent = `
                 .search-input {
-                    padding: 12px 20px;
+                    padding: 14px 20px;
                     border: 2px solid var(--border-color);
-                    border-radius: 25px;
+                    border-radius: var(--button-radius);
                     font-size: 1em;
                     transition: var(--transition);
                     flex-grow: 1;
                     min-width: 200px;
+                    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' stroke='%23FF6B35' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3e%3ccircle cx='11' cy='11' r='8'%3e%3c/circle%3e%3cline x1='21' y1='21' x2='16.65' y2='16.65'%3e%3c/line%3e%3c/svg%3e");
+                    background-repeat: no-repeat;
+                    background-position: right 15px center;
+                    padding-right: 45px;
                 }
                 .search-input:focus {
                     outline: none;
                     border-color: var(--primary-color);
+                    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.25);
                 }
             `;
             document.head.appendChild(style);
