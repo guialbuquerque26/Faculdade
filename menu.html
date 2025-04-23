@@ -793,6 +793,444 @@
         .categoria:nth-child(3n+3) h2:before {
             content: "🥤";
         }
+
+        /* Botão de Acompanhamento Flutuante */
+        .botao-acompanhamento {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(76, 185, 68, 0.4);
+            z-index: 98;
+            transition: all 0.3s ease;
+            font-size: 24px;
+            border: none;
+        }
+
+        .botao-acompanhamento:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(76, 185, 68, 0.5);
+            background-color: var(--secondary-dark);
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+            right: 70px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .botao-acompanhamento:hover .tooltip {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .botao-acompanhamento {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+
+        /* Estilos para o acompanhamento de pedido */
+        #acompanhamento-pedido {
+            background: var(--white);
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            padding: 35px;
+            text-align: center;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            z-index: 1000;
+            border-top: 5px solid var(--secondary-color);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        #acompanhamento-pedido h2 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .pedido-info {
+            background-color: var(--background-light);
+            padding: 15px;
+            border-radius: var(--input-radius);
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .pedido-info p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            transition: all 0.5s;
+            flex: 1;
+        }
+
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--background-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            transition: all 0.5s;
+            border: 2px solid var(--border-color);
+        }
+
+        .step-label {
+            font-size: 0.9em;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.5s;
+            text-align: center;
+            max-width: 80px;
+        }
+
+        .progress-line {
+            height: 5px;
+            background-color: var(--background-dark);
+            flex-grow: 1;
+            margin: 0 -5px;
+            position: relative;
+            top: -25px;
+            z-index: 0;
+            max-width: 60px;
+        }
+
+        .progress-step.active .step-icon {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-color: var(--secondary-color);
+            animation: pulse 1.5s infinite;
+        }
+
+        .progress-step.active .step-label {
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .progress-step.completed .step-icon {
+            background-color: var(--success-color);
+            color: var(--white);
+            border-color: var(--success-color);
+        }
+
+        .progress-step.completed .step-label {
+            color: var(--success-color);
+        }
+
+        .progress-step.completed + .progress-line {
+            background-color: var(--success-color);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(76, 185, 68, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(76, 185, 68, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(76, 185, 68, 0);
+            }
+        }
+
+        .resumo-pedido {
+            background-color: var(--background-light);
+            padding: 20px;
+            border-radius: var(--input-radius);
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .resumo-pedido h3 {
+            color: var(--text-color);
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.3em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .resumo-total {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: right;
+            color: var(--secondary-color);
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+
+        /* Estilos para os botões de acompanhamento */
+        .botoes-acompanhamento {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .botoes-acompanhamento .btn {
+            flex: 1;
+        }
+
+        .btn-danger {
+            background-color: var(--error-color);
+            color: var(--white);
+            box-shadow: 0 4px 10px rgba(244, 67, 54, 0.3);
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(244, 67, 54, 0.4);
+        }
+
+        /* Histórico de pedidos */
+        #historico-pedidos {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--white);
+            padding: 35px;
+            border-radius: var(--card-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 700px;
+            z-index: 1000;
+            border-top: 5px solid var(--accent-color);
+            max-height: 80vh;
+            overflow-y: auto;
+            display: none;
+        }
+
+        #historico-pedidos h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .lista-pedidos {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .item-historico {
+            background-color: var(--background-light);
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 15px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .item-historico:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-color);
+        }
+
+        .item-historico-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 10px;
+        }
+
+        .item-historico-numero {
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 1.1em;
+        }
+
+        .item-historico-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .status-recebido {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-preparacao {
+            background-color: #fff8e1;
+            color: #ff8f00;
+        }
+
+        .status-entrega {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .status-entregue {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .status-cancelado {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+
+        .item-historico-data {
+            color: var(--text-light);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .item-historico-total {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 10px;
+        }
+
+        .sem-pedidos {
+            text-align: center;
+            color: var(--text-light);
+            padding: 30px 0;
+        }
+
+        .botoes-historico {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        /* Menu de usuário */
+        .menu-usuario {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 97;
+        }
+
+        .menu-usuario-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            border: none;
+            font-size: 20px;
+        }
+
+        .menu-usuario-btn:hover {
+            background-color: var(--primary-color);
+        }
+
+        .menu-usuario-dropdown {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background-color: var(--white);
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow);
+            padding: 10px 0;
+            min-width: 180px;
+            display: none;
+        }
+
+        .menu-usuario-dropdown.aberto {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .menu-usuario-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-usuario-item:hover {
+            background-color: var(--background-light);
+            color: var(--primary-color);
+        }
+
+        /* Responsividade para o acompanhamento */
+        @media (max-width: 768px) {
+            #acompanhamento-pedido {
+                padding: 20px;
+                width: 95%;
+            }
+
+            .progress-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .progress-step {
+                margin: 10px 15px;
+            }
+
+            .progress-line {
+                display: none;
+            }
+
+            .step-label {
+                max-width: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -972,6 +1410,12 @@
 
     <div id="overlay"></div>
 
+    <!-- Botão de Acompanhamento Flutuante -->
+    <button class="botao-acompanhamento" id="botao-acompanhamento" style="display: none;">
+        🔍
+        <span class="tooltip">Ver status do pedido</span>
+    </button>
+
     <!-- Formulário de Finalização -->
     <div id="formulario-finalizacao" style="display: none;">
         <h2>Finalizar Pedido</h2>
@@ -996,6 +1440,74 @@
             <button type="submit">Confirmar Pedido</button>
             <button type="button" onclick="cancelarPedido()">Cancelar</button>
         </form>
+    </div>
+
+    <!-- Tela de Acompanhamento de Pedido -->
+    <div id="acompanhamento-pedido" style="display: none;">
+        <h2>Acompanhamento do Pedido</h2>
+        <div class="pedido-info">
+            <p><strong>Número do Pedido:</strong> <span id="numero-pedido"></span></p>
+            <p><strong>Status:</strong> <span id="status-pedido">Recebido</span></p>
+            <p><strong>Tempo Estimado:</strong> <span id="tempo-estimado">30-45 minutos</span></p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-step active">
+                <div class="step-icon">📋</div>
+                <div class="step-label">Pedido Recebido</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+                <div class="step-icon">👨‍🍳</div>
+                <div class="step-label">Em Preparação</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+                <div class="step-icon">🚚</div>
+                <div class="step-label">Em Entrega</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+                <div class="step-icon">✅</div>
+                <div class="step-label">Entregue</div>
+            </div>
+        </div>
+        
+        <div class="resumo-pedido">
+            <h3>Resumo do Pedido</h3>
+            <div id="itens-resumo"></div>
+            <div class="resumo-total">
+                <p>Total: R$ <span id="resumo-total">0,00</span></p>
+            </div>
+        </div>
+        
+        <div class="botoes-acompanhamento">
+            <button type="button" class="btn btn-primary" onclick="voltarAoCardapio()">Voltar ao Cardápio</button>
+            <button type="button" class="btn btn-danger" onclick="cancelarPedidoAcompanhamento()">Cancelar Pedido</button>
+        </div>
+    </div>
+
+    <!-- Histórico de pedidos -->
+    <div id="historico-pedidos" style="display: none;">
+        <h2>Histórico de Pedidos</h2>
+        <div class="lista-pedidos">
+            <!-- Pedidos serão adicionados dinamicamente -->
+        </div>
+        <div class="botoes-historico">
+            <button type="button" class="btn btn-primary" onclick="fecharHistorico()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Menu de usuário -->
+    <div class="menu-usuario">
+        <button class="menu-usuario-btn" id="menu-usuario-btn">
+            👤
+        </button>
+        <div class="menu-usuario-dropdown">
+            <a href="#" class="menu-usuario-item">Perfil</a>
+            <a href="#" class="menu-usuario-item">Histórico</a>
+            <a href="#" class="menu-usuario-item">Sair</a>
+        </div>
     </div>
 
     <script>
@@ -1166,7 +1678,392 @@
             document.getElementById('formulario-finalizacao').style.display = 'none';
         }
 
+        // Função para voltar ao cardápio após o acompanhamento
+        function voltarAoCardapio() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('acompanhamento-pedido').style.display = 'none';
+        }
+
+        // Função para cancelar o pedido da tela de acompanhamento
+        function cancelarPedidoAcompanhamento() {
+            const confirmacao = confirm('Tem certeza que deseja cancelar este pedido?');
+            
+            if (confirmacao) {
+                // Obter o pedido atual e o histórico
+                const pedidoAtual = JSON.parse(localStorage.getItem('pedidoAtual'));
+                let historicoPedidos = JSON.parse(localStorage.getItem('historicoPedidos')) || [];
+                
+                // Marcar o pedido como cancelado antes de adicionar ao histórico
+                if (pedidoAtual) {
+                    pedidoAtual.status = 'Cancelado';
+                    pedidoAtual.dataCancelamento = new Date().toISOString();
+                    
+                    // Adicionar ao histórico se já não estiver lá
+                    const jaNoHistorico = historicoPedidos.some(p => p.numero === pedidoAtual.numero);
+                    if (!jaNoHistorico) {
+                        historicoPedidos.push(pedidoAtual);
+                        localStorage.setItem('historicoPedidos', JSON.stringify(historicoPedidos));
+                    } else {
+                        // Atualizar o registro existente
+                        historicoPedidos = historicoPedidos.map(p => 
+                            p.numero === pedidoAtual.numero ? pedidoAtual : p
+                        );
+                        localStorage.setItem('historicoPedidos', JSON.stringify(historicoPedidos));
+                    }
+                    
+                    // Remover o pedido ativo
+                    localStorage.removeItem('pedidoAtual');
+                }
+                
+                // Esconder botão de acompanhamento
+                document.getElementById('botao-acompanhamento').style.display = 'none';
+                
+                // Fechar a tela de acompanhamento
+                document.getElementById('overlay').style.display = 'none';
+                document.getElementById('acompanhamento-pedido').style.display = 'none';
+                
+                // Limpar o carrinho e seleções
+                document.querySelectorAll('.item input[type="checkbox"]:checked').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                atualizarCarrinho();
+                
+                // Informar ao usuário
+                alert('Seu pedido foi cancelado com sucesso.');
+            }
+        }
+
+        // Processar o formulário de finalização
+        document.getElementById('form-pedido').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Verifica se todos os campos necessários foram preenchidos
+            const nome = document.getElementById('nome').value;
+            const endereco = document.getElementById('endereco').value;
+            const formaPagamento = document.querySelector('input[name="pagamento"]:checked');
+            
+            if (!nome || !endereco || !formaPagamento) {
+                alert('Por favor, preencha todos os campos do formulário.');
+                return;
+            }
+            
+            // Gerar número de pedido aleatório
+            const numeroPedido = Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('numero-pedido').textContent = '#' + numeroPedido;
+            
+            // Copiar itens do carrinho para o resumo
+            const itensCarrinho = document.getElementById('itens-carrinho').innerHTML;
+            document.getElementById('itens-resumo').innerHTML = itensCarrinho;
+            
+            // Copiar o valor total
+            const totalValor = document.getElementById('total').textContent;
+            document.getElementById('resumo-total').textContent = totalValor;
+            
+            // Esconder formulário e mostrar acompanhamento
+            document.getElementById('formulario-finalizacao').style.display = 'none';
+            document.getElementById('acompanhamento-pedido').style.display = 'block';
+            
+            // Mostrar botão de acompanhamento flutuante
+            document.getElementById('botao-acompanhamento').style.display = 'flex';
+            
+            // Salvar informações do pedido no localStorage
+            const pedidoInfo = {
+                numero: numeroPedido,
+                cliente: nome,
+                endereco: endereco,
+                formaPagamento: formaPagamento.value,
+                itens: itensCarrinho,
+                total: totalValor,
+                status: 'Recebido',
+                tempoEstimado: '30-45 minutos',
+                etapaAtual: 0,
+                dataCriacao: new Date().toISOString(),
+                ultimaAtualizacao: new Date().toISOString()
+            };
+            
+            // Salvar como pedido ativo
+            localStorage.setItem('pedidoAtual', JSON.stringify(pedidoInfo));
+            
+            // Limpar formulário
+            document.getElementById('nome').value = '';
+            document.getElementById('endereco').value = '';
+            document.querySelectorAll('input[name="pagamento"]').forEach(radio => radio.checked = false);
+            
+            // Simular avanço do status do pedido
+            simulaAcompanhamentoPedido();
+        });
+        
+        // Função para simular o avanço do status do pedido
+        function simulaAcompanhamentoPedido() {
+            const steps = document.querySelectorAll('.progress-step');
+            const statusText = document.getElementById('status-pedido');
+            const tempoEstimado = document.getElementById('tempo-estimado');
+            let pedidoInfo = JSON.parse(localStorage.getItem('pedidoAtual'));
+            
+            // Resetar etapas (para caso de visualizações repetidas)
+            steps.forEach(step => {
+                step.classList.remove('active', 'completed');
+            });
+            steps[0].classList.add('active');
+            
+            // Avançar para "Em Preparação" após 5 segundos
+            setTimeout(() => {
+                steps[0].classList.add('completed');
+                steps[1].classList.add('active');
+                statusText.textContent = 'Em Preparação';
+                tempoEstimado.textContent = '25-35 minutos';
+                
+                // Atualizar localStorage
+                if (pedidoInfo) {
+                    pedidoInfo.status = 'Em Preparação';
+                    pedidoInfo.tempoEstimado = '25-35 minutos';
+                    pedidoInfo.etapaAtual = 1;
+                    pedidoInfo.ultimaAtualizacao = new Date().toISOString();
+                    localStorage.setItem('pedidoAtual', JSON.stringify(pedidoInfo));
+                    
+                    // Atualizar no histórico também
+                    atualizarPedidoNoHistorico(pedidoInfo);
+                }
+            }, 5000);
+            
+            // Avançar para "Em Entrega" após mais 10 segundos
+            setTimeout(() => {
+                steps[1].classList.add('completed');
+                steps[2].classList.add('active');
+                statusText.textContent = 'Em Entrega';
+                tempoEstimado.textContent = '10-15 minutos';
+                
+                // Atualizar localStorage
+                if (pedidoInfo) {
+                    pedidoInfo.status = 'Em Entrega';
+                    pedidoInfo.tempoEstimado = '10-15 minutos';
+                    pedidoInfo.etapaAtual = 2;
+                    pedidoInfo.ultimaAtualizacao = new Date().toISOString();
+                    localStorage.setItem('pedidoAtual', JSON.stringify(pedidoInfo));
+                    
+                    // Atualizar no histórico também
+                    atualizarPedidoNoHistorico(pedidoInfo);
+                }
+            }, 15000);
+            
+            // Avançar para "Entregue" após mais 10 segundos
+            setTimeout(() => {
+                steps[2].classList.add('completed');
+                steps[3].classList.add('active');
+                statusText.textContent = 'Entregue';
+                tempoEstimado.textContent = 'Entregue!';
+                
+                // Atualizar localStorage
+                if (pedidoInfo) {
+                    pedidoInfo.status = 'Entregue';
+                    pedidoInfo.tempoEstimado = 'Entregue!';
+                    pedidoInfo.etapaAtual = 3;
+                    pedidoInfo.ultimaAtualizacao = new Date().toISOString();
+                    pedidoInfo.dataEntrega = new Date().toISOString();
+                    localStorage.setItem('pedidoAtual', JSON.stringify(pedidoInfo));
+                    
+                    // Adicionar ao histórico e remover dos pedidos ativos após finalizado
+                    atualizarPedidoNoHistorico(pedidoInfo);
+                    
+                    // Após 10 segundos finalizamos o pedido como ativo
+                    setTimeout(() => {
+                        localStorage.removeItem('pedidoAtual');
+                        document.getElementById('botao-acompanhamento').style.display = 'none';
+                    }, 10000);
+                }
+            }, 25000);
+        }
+        
+        // Função para atualizar ou adicionar pedido no histórico
+        function atualizarPedidoNoHistorico(pedido) {
+            let historico = JSON.parse(localStorage.getItem('historicoPedidos')) || [];
+            
+            // Verificar se o pedido já existe no histórico
+            const index = historico.findIndex(p => p.numero === pedido.numero);
+            
+            if (index !== -1) {
+                // Atualizar o pedido existente
+                historico[index] = pedido;
+            } else {
+                // Adicionar novo pedido
+                historico.push(pedido);
+            }
+            
+            // Ordenar do mais recente para o mais antigo
+            historico.sort((a, b) => new Date(b.dataCriacao) - new Date(a.dataCriacao));
+            
+            // Limitar a 20 pedidos no histórico
+            if (historico.length > 20) {
+                historico = historico.slice(0, 20);
+            }
+            
+            localStorage.setItem('historicoPedidos', JSON.stringify(historico));
+        }
+        
+        // Função para abrir o acompanhamento de pedido a partir do botão flutuante
+        document.getElementById('botao-acompanhamento').addEventListener('click', function() {
+            const pedidoInfo = JSON.parse(localStorage.getItem('pedidoAtual'));
+            
+            if (pedidoInfo) {
+                // Preencher as informações na tela de acompanhamento
+                document.getElementById('numero-pedido').textContent = '#' + pedidoInfo.numero;
+                document.getElementById('status-pedido').textContent = pedidoInfo.status;
+                document.getElementById('tempo-estimado').textContent = pedidoInfo.tempoEstimado;
+                document.getElementById('itens-resumo').innerHTML = pedidoInfo.itens;
+                document.getElementById('resumo-total').textContent = pedidoInfo.total;
+                
+                // Mostrar o status visual correto
+                const steps = document.querySelectorAll('.progress-step');
+                steps.forEach(step => {
+                    step.classList.remove('active', 'completed');
+                });
+                
+                for (let i = 0; i < pedidoInfo.etapaAtual; i++) {
+                    steps[i].classList.add('completed');
+                }
+                
+                if (pedidoInfo.etapaAtual <= 3) {
+                    steps[pedidoInfo.etapaAtual].classList.add('active');
+                }
+                
+                // Exibir a tela de acompanhamento
+                document.getElementById('overlay').style.display = 'block';
+                document.getElementById('acompanhamento-pedido').style.display = 'block';
+            } else {
+                alert('Não há pedido ativo para acompanhar. Veja seu histórico de pedidos ou faça um novo pedido!');
+            }
+        });
+        
+        // Funções para o histórico de pedidos
+        function mostrarHistoricoPedidos() {
+            const historico = JSON.parse(localStorage.getItem('historicoPedidos')) || [];
+            const listaContainer = document.querySelector('#historico-pedidos .lista-pedidos');
+            
+            // Limpar conteúdo anterior
+            listaContainer.innerHTML = '';
+            
+            if (historico.length === 0) {
+                listaContainer.innerHTML = '<div class="sem-pedidos">Você ainda não realizou nenhum pedido.</div>';
+                return;
+            }
+            
+            // Adicionar cada pedido à lista
+            historico.forEach(pedido => {
+                const data = new Date(pedido.dataCriacao);
+                const dataFormatada = `${data.toLocaleDateString()} às ${data.toLocaleTimeString().substring(0, 5)}`;
+                
+                // Determinar a classe CSS para o status
+                let statusClass = '';
+                switch(pedido.status) {
+                    case 'Recebido':
+                        statusClass = 'status-recebido';
+                        break;
+                    case 'Em Preparação':
+                        statusClass = 'status-preparacao';
+                        break;
+                    case 'Em Entrega':
+                        statusClass = 'status-entrega';
+                        break;
+                    case 'Entregue':
+                        statusClass = 'status-entregue';
+                        break;
+                    case 'Cancelado':
+                        statusClass = 'status-cancelado';
+                        break;
+                }
+                
+                const itemHTML = `
+                    <div class="item-historico" data-numero="${pedido.numero}">
+                        <div class="item-historico-header">
+                            <div class="item-historico-numero">Pedido #${pedido.numero}</div>
+                            <div class="item-historico-status ${statusClass}">${pedido.status}</div>
+                        </div>
+                        <div class="item-historico-data">Realizado em: ${dataFormatada}</div>
+                        <div class="item-historico-total">Total: R$ ${pedido.total}</div>
+                    </div>
+                `;
+                
+                listaContainer.innerHTML += itemHTML;
+            });
+            
+            // Adicionar evento de clique para ver detalhes do pedido
+            document.querySelectorAll('.item-historico').forEach(item => {
+                item.addEventListener('click', function() {
+                    const numeroPedido = this.dataset.numero;
+                    const historico = JSON.parse(localStorage.getItem('historicoPedidos')) || [];
+                    const pedido = historico.find(p => p.numero == numeroPedido);
+                    
+                    if (pedido) {
+                        // Preencher as informações na tela de acompanhamento
+                        document.getElementById('numero-pedido').textContent = '#' + pedido.numero;
+                        document.getElementById('status-pedido').textContent = pedido.status;
+                        document.getElementById('tempo-estimado').textContent = pedido.tempoEstimado;
+                        document.getElementById('itens-resumo').innerHTML = pedido.itens;
+                        document.getElementById('resumo-total').textContent = pedido.total;
+                        
+                        // Mostrar o status visual correto
+                        const steps = document.querySelectorAll('.progress-step');
+                        steps.forEach(step => {
+                            step.classList.remove('active', 'completed');
+                        });
+                        
+                        if (pedido.status !== 'Cancelado') {
+                            for (let i = 0; i < pedido.etapaAtual; i++) {
+                                steps[i].classList.add('completed');
+                            }
+                            
+                            if (pedido.etapaAtual <= 3) {
+                                steps[pedido.etapaAtual].classList.add('active');
+                            }
+                        }
+                        
+                        // Fechar histórico e mostrar detalhes
+                        document.getElementById('historico-pedidos').style.display = 'none';
+                        document.getElementById('overlay').style.display = 'block';
+                        document.getElementById('acompanhamento-pedido').style.display = 'block';
+                    }
+                });
+            });
+            
+            // Mostrar o modal
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('historico-pedidos').style.display = 'block';
+        }
+        
+        // Função para fechar o histórico de pedidos
+        function fecharHistorico() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('historico-pedidos').style.display = 'none';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se há pedido ativo e mostrar o botão de acompanhamento
+            const pedidoAtivo = localStorage.getItem('pedidoAtual');
+            if (pedidoAtivo) {
+                document.getElementById('botao-acompanhamento').style.display = 'flex';
+            }
+            
+            // Adicionar funcionalidade ao menu de usuário
+            const menuBtn = document.getElementById('menu-usuario-btn');
+            const menuDropdown = document.querySelector('.menu-usuario-dropdown');
+            
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menuDropdown.classList.toggle('aberto');
+            });
+            
+            // Fechar menu ao clicar fora
+            document.addEventListener('click', function() {
+                menuDropdown.classList.remove('aberto');
+            });
+            
+            // Adicionar evento ao item de histórico
+            const itemHistorico = document.querySelector('.menu-usuario-item:nth-child(2)');
+            itemHistorico.addEventListener('click', function(e) {
+                e.preventDefault();
+                mostrarHistoricoPedidos();
+            });
+            
             const filtros = document.querySelectorAll('.filtro-btn');
             const categorias = document.querySelectorAll('.categoria');
 
